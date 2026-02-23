@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -24,7 +23,6 @@ function App() {
           {/* --- HOME PAGE --- */}
           <Route path="/" element={
             <>
-            <Toaster position="top-right"/>
               <Hero />
               <Features />
               <Services />
