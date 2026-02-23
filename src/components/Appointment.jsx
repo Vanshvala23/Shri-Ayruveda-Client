@@ -4,12 +4,13 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
+/* ✅ Country codes WITH FLAGS */
 const countryCodes = [
-  { code: "+91", label: "IN (+91)" },
-  { code: "+1", label: "US (+1)" },
-  { code: "+44", label: "UK (+44)" },
-  { code: "+971", label: "UAE (+971)" },
-  { code: "+61", label: "AU (+61)" },
+  { code: "+91", label: "🇮🇳 IN (+91)" },
+  { code: "+1", label: "🇺🇸 US (+1)" },
+  { code: "+44", label: "🇬🇧 UK (+44)" },
+  { code: "+971", label: "🇦🇪 UAE (+971)" },
+  { code: "+61", label: "🇦🇺 AU (+61)" },
 ];
 
 const Appointment = () => {
@@ -29,7 +30,7 @@ const Appointment = () => {
 
   const [phoneError, setPhoneError] = useState(false);
 
-  // Prefill service from previous page
+  /* ✅ Prefill service */
   useEffect(() => {
     if (location.state?.selectedTherapy) {
       setSelectedService(location.state.selectedTherapy);
@@ -43,6 +44,7 @@ const Appointment = () => {
     });
   };
 
+  /* ✅ Phone validation (digits only) */
   const handlePhoneChange = (value) => {
     if (/^\d*$/.test(value)) {
       setFormData({ ...formData, phone: value });
@@ -113,11 +115,13 @@ const Appointment = () => {
   return (
     <section className="py-20 bg-green-50" id="appointment">
       <Toaster position="top-right" />
+
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="bg-white rounded-[2rem] shadow-xl overflow-hidden flex flex-col lg:flex-row">
+          
           {/* LEFT SIDE */}
           <div className="lg:w-5/12 bg-green-900 text-white p-10 md:p-14 relative flex flex-col justify-between">
-            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]"></div>
+            <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leaf.png')]" />
 
             <div className="relative z-10">
               <p className="text-orange-500 font-bold tracking-widest uppercase text-xs mb-4">
@@ -160,12 +164,11 @@ const Appointment = () => {
 
           {/* RIGHT SIDE FORM */}
           <div className="lg:w-7/12 p-10 md:p-14">
-            <form
-              ref={formRef}
-              className="space-y-6"
-              onSubmit={handleSubmit}
-            >
+            <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+              
+              {/* NAME + PHONE */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
                 {/* NAME */}
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
@@ -188,11 +191,13 @@ const Appointment = () => {
                   </label>
 
                   <div className="flex gap-2">
+                    
+                    {/* ✅ COUNTRY SELECT FIXED */}
                     <select
                       name="countryCode"
                       value={formData.countryCode}
                       onChange={handleChange}
-                      className="px-0 py-0 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange-500 focus:outline-none"
+                      className="px-3 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange-500 focus:outline-none min-w-[130px] text-sm"
                     >
                       {countryCodes.map((c) => (
                         <option key={c.code} value={c.code}>
@@ -201,6 +206,7 @@ const Appointment = () => {
                       ))}
                     </select>
 
+                    {/* PHONE INPUT */}
                     <input
                       name="phone"
                       value={formData.phone}
@@ -210,7 +216,7 @@ const Appointment = () => {
                       type="tel"
                       maxLength={10}
                       placeholder="Your Phone Number"
-                      className={`w-full px-6 py-3 rounded-lg bg-gray-50 border ${
+                      className={`w-full px-4 py-3 rounded-lg bg-gray-50 border ${
                         phoneError
                           ? "border-red-500"
                           : "border-gray-200"
@@ -243,8 +249,7 @@ const Appointment = () => {
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                    <Clock size={16} className="text-orange-500" /> Preferred
-                    Date
+                    <Clock size={16} className="text-orange-500" /> Preferred Date
                   </label>
                   <input
                     name="date"
@@ -268,7 +273,7 @@ const Appointment = () => {
                   rows="4"
                   placeholder="Tell us about your health concern..."
                   className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-orange-500 focus:bg-white focus:outline-none transition-colors"
-                ></textarea>
+                />
               </div>
 
               <button
